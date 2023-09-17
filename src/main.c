@@ -6,7 +6,7 @@
 typedef char *string;
 
 // Global definitions
-#define error_message "Not enough arguments provided. Examples:\n$ cdock new {name}\n$ cdock start {name}\n$ cdock rmcontainer {name}\n$ cdock rmimage {name}\n\nNote: You must have a Dockerfile in the working directory if running/building an image/container!\n"
+#define error_message "Not enough arguments provided. Examples:\n$ cdock new {name}\n$ cdock start {name}\n$ cdock rmcontainer {name}\n$ cdock rmimage {name}\n$ cdock gen {lang}\n\nNote: You must have a Dockerfile in the working directory if running/building an image/container!\n"
 #define base_cmd_run "docker run -it --rm --name "
 #define base_cmd_build "docker build -t "
 #define base_cmd_delete_image "docker rmi "
@@ -23,6 +23,7 @@ int command_start(string);
 int command_new(string);
 int command_rmcontainer(string);
 int command_rmimage(string);
+int command_gen(string);
 
 int streq(string, string);
 
@@ -36,23 +37,27 @@ int main(int argc, char **argv)
   }
 
   string command = argv[1];
-  string name = argv[2];
+  string arg2 = argv[2];
 
   if (streq(command, "new"))
   {
-    command_new(name);
+    command_new(arg2);
   }
   else if (streq(command, "start"))
   {
-    command_start(name);
+    command_start(arg2);
   }
   else if (streq(command, "rmcontainer"))
   {
-    command_rmcontainer(name);
+    command_rmcontainer(arg2);
   }
   else if (streq(command, "rmimage"))
   {
-    command_rmimage(name);
+    command_rmimage(arg2);
+  }
+  else if (streq(command, "gen"))
+  {
+    command_gen(arg2);
   }
   else
   {
@@ -100,6 +105,27 @@ int command_new(string name)
 
   // Run the container
   return command_start(name);
+}
+
+/**
+ * Generate a Dockerfile for the given language in the current directory
+ * @param lang The language to generate the dockerfile for
+ * @return 1 if successful, 0 if not
+ */
+int command_gen(string lang)
+{
+  FILE *file = fopen("Dockerfile", "w");
+
+  // If C lang
+  if (streq(lang, "c"))
+  {
+    fprintf(file, "FROM gcc:latest\n");
+  }
+
+  fprintf(file, "WORKDIR /app");
+  fprintf(file, "COPY . /app\n");
+
+  return 1;
 }
 
 /**
