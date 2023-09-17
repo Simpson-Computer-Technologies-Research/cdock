@@ -97,7 +97,7 @@ int command_new(string name)
   printf("Checking if image %s already exists\n", name);
   if (image_exists(name))
   {
-    if (command_rmimage(name))
+    if (!command_rmimage(name))
     {
       printf("Image %s already exists and was unable to be deleted.\n", name);
       return 1;
@@ -142,7 +142,7 @@ int command_rmimage(string name)
 int image_exists(string name)
 {
   const char *command = base_cmd_exists_image;
-  string command_with_name = malloc(strlen(command) + strlen(name) + 1);
+  string command_with_name = malloc(strlen(command) + strlen(name) + 2);
 
   // Size of: strlen(command)
   strcpy(command_with_name, command);
