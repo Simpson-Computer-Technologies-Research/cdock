@@ -3,7 +3,7 @@
   "install": {
     "select_dir": false,
     "mac": [
-      "curl \"https://github.com/Simpson-Computer-Technologies-Research/cdock/raw/main/build/cdock\" -o /usr/local/bin/cdock"
+      "curl https://github.com/Simpson-Computer-Technologies-Research/cdock/raw/main/build/cdock -o /usr/local/bin/cdock"
     ],
     "windows": [
     ]
