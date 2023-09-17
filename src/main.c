@@ -122,8 +122,8 @@ int command_gen(string lang)
     fprintf(file, "FROM gcc:latest\n");
   }
 
-  fprintf(file, "WORKDIR /app");
-  fprintf(file, "COPY . /app\n");
+  fprintf(file, "WORKDIR /app\n");
+  fprintf(file, "COPY . /app");
 
   return 1;
 }
