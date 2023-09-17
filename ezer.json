@@ -1,5 +1,6 @@
 {
   "tab": "Tools",
+  "select_dir": false,
   "install": {
     "mac": [],
     "windows": []
