@@ -18,7 +18,6 @@ int build_image(string);
 int build_container(string);
 int delete_image(string);
 int delete_container(string);
-int image_exists(string);
 
 int command_start(string);
 int command_new(string);
@@ -92,17 +91,8 @@ int command_start(string name)
  */
 int command_new(string name)
 {
-  // If the image already exists, delete it. If the deletion wasn't
-  // successful, exit the program.
-  printf("Checking if image %s already exists\n", name);
-  if (image_exists(name))
-  {
-    if (!command_rmimage(name))
-    {
-      printf("Image %s already exists and was unable to be deleted.\n", name);
-      return 1;
-    }
-  }
+  // If the image already exists, delete it.
+  command_rmimage(name);
 
   // Build the image
   printf("Building image %s\n", name);
@@ -132,26 +122,6 @@ int command_rmimage(string name)
 {
   printf("Deleting image %s\n", name);
   return delete_image(name);
-}
-
-/**
- * Check if an image exists
- * @param name The image name
- * @return 1 if exists, 0 if not
- */
-int image_exists(string name)
-{
-  const char *command = base_cmd_exists_image;
-  string command_with_name = malloc(strlen(command) + strlen(name) + 2);
-
-  // Size of: strlen(command)
-  strcpy(command_with_name, command);
-
-  // Size of: strlen(name)
-  strcat(command_with_name, name);
-
-  // Execute the command
-  return system(command_with_name) == 0;
 }
 
 /**
