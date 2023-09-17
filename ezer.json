@@ -2,7 +2,11 @@
   "tab": "Tools",
   "install": {
     "select_dir": false,
-    "mac": [],
-    "windows": []
+    "mac": [
+      "echo hello1"
+    ],
+    "windows": [
+      "echo hello2"
+    ]
   }
 }
