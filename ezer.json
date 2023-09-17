@@ -1,7 +1,7 @@
 {
   "tab": "Tools",
-  "select_dir": false,
   "install": {
+    "select_dir": false,
     "mac": [],
     "windows": []
   }
