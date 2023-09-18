@@ -3,7 +3,7 @@
 ## Install
 ```
 MacOS:
-  $ sudo curl https://github.com/Simpson-Computer-Technologies-Research/cdock/blob/main/cdock?raw=true -o /usr/local/bin/cdock
+  $ sudo curl https://github.com/Simpson-Computer-Technologies-Research/cdock/raw/main/build/cdock -o /usr/local/bin/cdock
 ```
 
 # License
